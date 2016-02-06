@@ -100,7 +100,7 @@ struct
     let tls = `TLS (cfg, tcp) in
     Lwt.join [
       http tls @@ D.serve c (D.dispatcher data) ;
-      http (`TCP 80) @@ D.serve c D.redirect
+      http (`TCP 3000) @@ D.serve c (D.dispatcher data)
     ]
 
 end
