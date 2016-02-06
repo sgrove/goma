@@ -55,7 +55,7 @@ module Dispatch (C: CONSOLE) (FS: KV_RO) (S: HTTP) = struct
     Lwt.catch
       (fun () ->
          get_content c fs request uri >>= fun body ->
-         S.respond_string ~status:`OK ~body ())
+         S.respond_string ~status:`OK ~headers: (Cohttp.Header.of_list [("Content-Type", "text/html;charset=utf-8")]) ~body ())
       (fun _exn ->
          S.respond_not_found ())
 
