@@ -42,6 +42,10 @@ module Dispatch (C: CONSOLE) (FS: KV_RO) (S: HTTP) = struct
       in
       log c "Answering languages: %s" @@ String.concat ";" @@ lang ;
       Generator.page lang
+    | "/test.md" ->
+       Omd.of_string (Printf.sprintf "Omd Test\n======\n##MultiLanguage test\nPrekleto, OCaml, you're killing me, despite how {{adjective}} you are. 안녕 %s, 好久不见！ 元気か？　もう何歳？ %d じゃない?\n" "Sean" 31)
+       |> Omd.to_html
+       |> Lwt.return
     | s -> read_fs fs s
 
 
