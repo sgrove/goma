@@ -38,13 +38,9 @@ let html lang =
   H.html (head words) @@ (body words)
 
 let page =
-  let advert = "\
-Made with OCaml <https://ocaml.org/> mirage <https://mirage.io/> and ocsigen <https://ocsigen.org/>.\
-Join the camelians! \240\159\144\170"
-  in
   let f doc =
     let b = Buffer.create 17 in
-    Html5.P.print ~output:(Buffer.add_string b) ~advert doc ;
+    Html5.P.print ~output:(Buffer.add_string b) doc;
     Buffer.contents b
   in
   fun lang -> Lwt.return @@ f @@ html lang
